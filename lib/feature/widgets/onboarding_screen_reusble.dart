@@ -67,7 +67,7 @@ class _OnboardingScreenReusableState extends State<OnboardingScreenReusable> {
                 widget.isDescription
                     ? Text(
                   widget.description!,
-                  style: AppStyle.white20Regular,
+                  style: AppStyle.white20RegularOpacity60,
                   textAlign: TextAlign.center,
                 )
                     : SizedBox(),
@@ -86,7 +86,7 @@ class _OnboardingScreenReusableState extends State<OnboardingScreenReusable> {
                       ),
                     ),
                     onPressed: () {
-                      provider.incrementIndex();
+                      provider.incrementIndex(context);
                     },
                     child: Text(
                       widget.positiveButtonName,
@@ -127,7 +127,7 @@ class _OnboardingScreenReusableState extends State<OnboardingScreenReusable> {
 
 
                             widget.description!,
-                            style: AppStyle.white20Regular,
+                            style: AppStyle.white20RegularOpacity60,
                             textAlign: TextAlign.center,
                           ),
                       )
@@ -147,7 +147,7 @@ class _OnboardingScreenReusableState extends State<OnboardingScreenReusable> {
                         ),
                       ),
                       onPressed: () {
-                        provider.incrementIndex();
+                        provider.incrementIndex(context);
                       },
                       child: Text(
                         widget.positiveButtonName,

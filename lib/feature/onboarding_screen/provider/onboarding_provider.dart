@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/feature/auth/login_screen/login_screen.dart';
 
-import '../onboarding_screen_reusble.dart';
+import '../../widgets/onboarding_screen_reusble.dart';
 
 class OnboardingProvider extends ChangeNotifier {
   int index = 0;
@@ -13,7 +14,7 @@ class OnboardingProvider extends ChangeNotifier {
       positiveButtonName: "Explore Now",
       description:
           "Get access to a huge librar"
-              "y of movies to suit all tastes. You will surely like it.",
+          "y of movies to suit all tastes. You will surely like it.",
     ),
     OnboardingScreenReusable(
       title: "Discover Movies",
@@ -53,11 +54,11 @@ class OnboardingProvider extends ChangeNotifier {
     ),
   ];
 
-  incrementIndex() {
+  incrementIndex(BuildContext context) {
     if (index < 5) {
       index++;
-    }else{
-      ///Navigate to home screen
+    } else {
+      Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
     }
 
     notifyListeners();
