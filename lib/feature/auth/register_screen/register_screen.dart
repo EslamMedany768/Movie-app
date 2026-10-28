@@ -11,6 +11,8 @@ import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_style.dart';
 import 'package:provider/provider.dart';
 
+import '../../../l10n/app_localizations.dart';
+
 class RegisterScreen extends StatelessWidget {
   List<String> images = [
     "assets/images/gamer 1.png",
@@ -28,16 +30,20 @@ class RegisterScreen extends StatelessWidget {
     var languageProvider = Provider.of<LanguageProvider>(context);
     var size = MediaQuery.of(context).size;
     return Scaffold(
+
       backgroundColor: AppColors.black,
       appBar: AppBar(
+        elevation: 0,
+        scrolledUnderElevation: 0,
         backgroundColor: AppColors.black,
         centerTitle: true,
         iconTheme: IconThemeData(color: AppColors.orange),
         title: Text(
-          "Register",
+          AppLocalizations.of(context)!.register,
           style: AppStyle.orange14Regular.copyWith(fontSize: 16),
         ),
       ),
+
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
@@ -60,34 +66,45 @@ class RegisterScreen extends StatelessWidget {
                   viewportFraction: 1 / 3,
                   enableInfiniteScroll: true,
                   height: size.height * 0.18,
-
                 ),
               ),
               SizedBox(height: size.height * 0.01),
               Text(
                 textAlign: TextAlign.center,
-                "Avatar",
+                AppLocalizations.of(context)!.avatar,
                 style: AppStyle.orange14Regular.copyWith(
                   fontSize: 16,
                   color: AppColors.white,
                 ),
               ),
               SizedBox(height: size.height * 0.01),
-              CustomTextField(text: "Name", prefixIcon: Icons.person),
-              SizedBox(height: size.height * 0.02),
-              CustomTextField(text: "Email", prefixIcon: Icons.email),
-              SizedBox(height: size.height * 0.02),
-              CustomTextField(text: "Password", prefixIcon: Icons.person),
-              SizedBox(height: size.height * 0.02),
               CustomTextField(
-                text: "Confirm Password",
+                text: AppLocalizations.of(context)!.name,
                 prefixIcon: Icons.person,
               ),
               SizedBox(height: size.height * 0.02),
-              CustomTextField(text: "Phone Number", prefixIcon: Icons.person),
+              CustomTextField(
+                text: AppLocalizations.of(context)!.email,
+                prefixIcon: Icons.email,
+              ),
+              SizedBox(height: size.height * 0.02),
+              CustomTextField(
+                text: AppLocalizations.of(context)!.password,
+                prefixIcon: Icons.person,
+              ),
+              SizedBox(height: size.height * 0.02),
+              CustomTextField(
+                text: AppLocalizations.of(context)!.confirm_password,
+                prefixIcon: Icons.person,
+              ),
+              SizedBox(height: size.height * 0.02),
+              CustomTextField(
+                text: AppLocalizations.of(context)!.phone_number,
+                prefixIcon: Icons.person,
+              ),
               SizedBox(height: size.height * 0.025),
               CustomElevatedButton(
-                text: "Create Account",
+                text: AppLocalizations.of(context)!.create_account,
                 bgColor: AppColors.orange,
                 function: () {},
               ),
@@ -96,9 +113,12 @@ class RegisterScreen extends StatelessWidget {
                 child: RichText(
                   text: TextSpan(
                     children: [
-                      TextSpan(text: "Already Have Account ? "),
                       TextSpan(
-                        text: "Login",
+                        text:
+                            "${AppLocalizations.of(context)!.already_have_account} ",
+                      ),
+                      TextSpan(
+                        text: AppLocalizations.of(context)!.login,
                         style: AppStyle.orange14Regular.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -106,7 +126,7 @@ class RegisterScreen extends StatelessWidget {
                           ..onTap = () {
                             Navigator.of(
                               context,
-                            ).pushNamed(LoginScreen.routeName);
+                            ).pop();
                           },
                       ),
                     ],
@@ -116,6 +136,7 @@ class RegisterScreen extends StatelessWidget {
               SizedBox(height: size.height * 0.015),
               Localizations.override(
                 context: context,
+
                 locale: Locale("en"),
                 child: Center(
                   child: SizedBox(
@@ -131,7 +152,7 @@ class RegisterScreen extends StatelessWidget {
                       innerPadding: EdgeInsets.symmetric(horizontal: 0),
 
                       padding: 8,
-                      initialValue: 1,
+                      initialValue: languageProvider.currentLang=="en"?1:2,
                       decoration: BoxDecoration(
                         border: Border.all(width: 3, color: AppColors.orange),
                         color: Colors.transparent,

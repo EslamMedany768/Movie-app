@@ -1,5 +1,18 @@
 {
 "login":"تسجيل الدخول",
-"create_account":"انشاء حساب"
-
+"create_account":"انشاء حساب",
+"email":"الايميل",
+"password":"الباسورد",
+"forget_password":"نسيت كلمة المرور",
+"dont_have_acc":"لا تمتلك حساب ؟",
+"create_one":"انشاءواحد",
+"or":"او",
+"login_with_google":"تسجيل عبر جوجل",
+"confirm_password":"تأكيد الباسورد",
+"phone_number":"رقم الهاتف",
+"verify_email":"تحقق",
+"register":"انشاء حساب",
+"name":"الاسم",
+"avatar":"افاتار",
+"already_have_account":"بالفعل أمتلك حساب ؟"
 }

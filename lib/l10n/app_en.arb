@@ -1,5 +1,18 @@
 {
 "login":"Login",
-"create_account":"Create Account"
-
+"create_account":"Create Account",
+"email":"Email",
+"password":"Password",
+"forget_password":"Forget Password",
+"dont_have_acc":"Don't Have Account ?",
+"create_one":"Create One",
+"or":"OR",
+"login_with_google":"Login With Google",
+"confirm_password":"Password",
+"phone_number":"Phone Number",
+"verify_email":"Verify Email",
+"avatar":"Avatar",
+"register":"Register",
+"name":"Name",
+"already_have_account":"Already Have Account ?"
 }

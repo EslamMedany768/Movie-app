@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/feature/widgets/custom_elevated_button.dart';
 import 'package:movies_app/feature/widgets/custom_text_field.dart';
+import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_style.dart';
 
@@ -18,7 +19,7 @@ class ForgetPassScreen extends StatelessWidget {
         iconTheme: IconThemeData(color: AppColors.orange),
         backgroundColor: AppColors.black,
         title: Text(
-          "Forget Password",
+          AppLocalizations.of(context)!.forget_password,
           style: AppStyle.orange14Regular.copyWith(fontSize: 16),
         ),
         centerTitle: true,
@@ -33,10 +34,10 @@ class ForgetPassScreen extends StatelessWidget {
               "assets/images/Forgot password Image.png",
               fit: BoxFit.fill,
             ),
-            CustomTextField(text: "Email", prefixIcon: Icons.email),
+            CustomTextField(text: AppLocalizations.of(context)!.email, prefixIcon: Icons.email),
             SizedBox(height: size.height * 0.03),
             CustomElevatedButton(
-              text: "Verify Email",
+              text: AppLocalizations.of(context)!.verify_email,
               bgColor: AppColors.orange,
               function: () {},
             ),

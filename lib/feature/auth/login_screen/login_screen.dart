@@ -36,10 +36,10 @@ class LoginScreen extends StatelessWidget {
                   width: double.infinity,
                   height: size.height * 0.3,
                 ),
-                CustomTextField(text: "Email", prefixIcon: Icons.email),
+                CustomTextField(text: AppLocalizations.of(context)!.email, prefixIcon: Icons.email),
                 SizedBox(height: size.height * 0.02),
                 CustomTextField(
-                  text: "Password",
+                  text: AppLocalizations.of(context)!.password,
                   prefixIcon: Icons.lock,
                   isSuffix: true,
                 ),
@@ -50,7 +50,7 @@ class LoginScreen extends StatelessWidget {
                       ///Custom textButton
                       CustomTextButton(
                         style: AppStyle.orange14Regular,
-                        text: "Forget Password ?",
+                        text: AppLocalizations.of(context)!.forget_password,
                         function: () {
                           Navigator.of(
                             context,
@@ -71,7 +71,7 @@ class LoginScreen extends StatelessWidget {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: "Don’t Have Account ?",
+                          text: "${AppLocalizations.of(context)!.dont_have_acc} ",
                           style: AppStyle.white14Roboto,
                         ),
                         TextSpan(
@@ -81,7 +81,7 @@ class LoginScreen extends StatelessWidget {
                                 context,
                               ).pushNamed(RegisterScreen.routeName);
                             },
-                          text: " Create One",
+                          text:AppLocalizations.of(context)!.create_account,
 
                           style: AppStyle.white14Roboto.copyWith(
                             color: AppColors.orange,
@@ -104,7 +104,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "OR",
+                      AppLocalizations.of(context)!.or,
                       style: AppStyle.white14Roboto.copyWith(fontSize: 15),
                     ),
                     Expanded(
@@ -119,7 +119,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 SizedBox(height: size.height * 0.025),
                 CustomElevatedButton(
-                  text: "Login With Google",
+                  text: AppLocalizations.of(context)!.login_with_google,
                   isPrefix: true,
                   iconPath: "assets/images/icon _google_.png",
                   bgColor: AppColors.orange,
@@ -145,7 +145,7 @@ class LoginScreen extends StatelessWidget {
                         innerPadding: EdgeInsets.symmetric(horizontal: 0),
 
                         padding: 8,
-                        initialValue: 1,
+                        initialValue: languageProvider.currentLang=="en"?1:2,
                         decoration: BoxDecoration(
                           border: Border.all(width: 3, color: AppColors.orange),
                           color: Colors.transparent,
