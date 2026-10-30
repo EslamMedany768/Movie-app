@@ -90,11 +90,15 @@ class RegisterScreen extends StatelessWidget {
               SizedBox(height: size.height * 0.02),
               CustomTextField(
                 text: AppLocalizations.of(context)!.password,
+                isObscure: true,
+                isSuffix: true,
                 prefixIcon: Icons.person,
               ),
               SizedBox(height: size.height * 0.02),
               CustomTextField(
                 text: AppLocalizations.of(context)!.confirm_password,
+                isObscure: true,
+                isSuffix: true,
                 prefixIcon: Icons.person,
               ),
               SizedBox(height: size.height * 0.02),

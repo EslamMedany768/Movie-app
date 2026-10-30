@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:movies_app/feature/auth/forget_pass_screen/forget_pass_screen.dart';
 import 'package:movies_app/feature/auth/register_screen/register_screen.dart';
+import 'package:movies_app/feature/home/home.dart';
 import 'package:movies_app/feature/widgets/custom_elevated_button.dart';
 import 'package:movies_app/feature/widgets/custom_text_button.dart';
 import 'package:movies_app/feature/widgets/custom_text_field.dart';
@@ -36,12 +37,16 @@ class LoginScreen extends StatelessWidget {
                   width: double.infinity,
                   height: size.height * 0.3,
                 ),
-                CustomTextField(text: AppLocalizations.of(context)!.email, prefixIcon: Icons.email),
+                CustomTextField(
+                  text: AppLocalizations.of(context)!.email,
+                  prefixIcon: Icons.email,
+                ),
                 SizedBox(height: size.height * 0.02),
                 CustomTextField(
                   text: AppLocalizations.of(context)!.password,
                   prefixIcon: Icons.lock,
                   isSuffix: true,
+                  isObscure: true,
                 ),
                 SizedBox(height: size.height * 0.001),
                 Align(
@@ -63,7 +68,9 @@ class LoginScreen extends StatelessWidget {
                 CustomElevatedButton(
                   text: AppLocalizations.of(context)!.login,
                   bgColor: AppColors.orange,
-                  function: () {},
+                  function: () {
+                    Navigator.of(context).pushReplacementNamed(Home.routeName);
+                  },
                 ),
                 SizedBox(height: size.height * 0.04),
                 Center(
@@ -71,7 +78,8 @@ class LoginScreen extends StatelessWidget {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: "${AppLocalizations.of(context)!.dont_have_acc} ",
+                          text:
+                              "${AppLocalizations.of(context)!.dont_have_acc} ",
                           style: AppStyle.white14Roboto,
                         ),
                         TextSpan(
@@ -81,7 +89,7 @@ class LoginScreen extends StatelessWidget {
                                 context,
                               ).pushNamed(RegisterScreen.routeName);
                             },
-                          text:AppLocalizations.of(context)!.create_account,
+                          text: AppLocalizations.of(context)!.create_account,
 
                           style: AppStyle.white14Roboto.copyWith(
                             color: AppColors.orange,
@@ -145,7 +153,9 @@ class LoginScreen extends StatelessWidget {
                         innerPadding: EdgeInsets.symmetric(horizontal: 0),
 
                         padding: 8,
-                        initialValue: languageProvider.currentLang=="en"?1:2,
+                        initialValue: languageProvider.currentLang == "en"
+                            ? 1
+                            : 2,
                         decoration: BoxDecoration(
                           border: Border.all(width: 3, color: AppColors.orange),
                           color: Colors.transparent,

@@ -7,12 +7,14 @@ class CustomTextField extends StatefulWidget {
   IconData? prefixIcon;
   String text;
   bool isSuffix;
+  bool isObscure;
 
   CustomTextField({
     super.key,
     required this.text,
     required this.prefixIcon,
     this.isSuffix = false,
+    this.isObscure=false
   });
 
   @override
@@ -20,11 +22,11 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-  bool isObscure = true;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      obscureText: isObscure,
+      obscureText: widget.isObscure,
       cursorColor: AppColors.white,
       style: AppStyle.white16Regular.copyWith(decorationThickness: 0),
       decoration: InputDecoration(
@@ -37,12 +39,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
         suffixIcon: widget.isSuffix
             ? IconButton(
                 onPressed: () {
-                  isObscure = !isObscure;
+                  widget. isObscure = !widget.isObscure;
                   setState(() {
 
                   });
                 },
-                icon: isObscure
+                icon: widget.isObscure
                     ? ImageIcon(
                         AssetImage("assets/images/icon _eye off_.png"),
                         color: AppColors.white,

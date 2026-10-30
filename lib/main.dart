@@ -7,6 +7,7 @@ import 'package:movies_app/providers/language_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'feature/auth/forget_pass_screen/forget_pass_screen.dart';
+import 'feature/home/home.dart';
 import 'feature/onboarding_screen/onboarding_screen.dart';
 import 'l10n/app_localizations.dart';
 
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         LoginScreen.routeName: (context) => LoginScreen(),
         ForgetPassScreen.routeName: (context) => ForgetPassScreen(),
         RegisterScreen.routeName: (context) => RegisterScreen(),
+        Home.routeName: (context) => Home(),
       },
     );
   }
