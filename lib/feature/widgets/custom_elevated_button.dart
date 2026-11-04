@@ -8,13 +8,15 @@ class CustomElevatedButton extends StatelessWidget {
   String iconPath;
   Color bgColor;
   String text;
+  TextStyle? style;
   void Function()? function;
 
   CustomElevatedButton({
     super.key,
+    this.style ,
     required this.text,
     this.isPrefix = false,
-     this.iconPath="",
+    this.iconPath = "",
     required this.bgColor,
     required this.function,
   });
@@ -26,20 +28,24 @@ class CustomElevatedButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 12),
         backgroundColor: bgColor,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadiusGeometry.all(Radius.circular(8)),
+          borderRadius: BorderRadiusGeometry.all(Radius.circular(12)),
         ),
       ),
-      onPressed:function,
+      onPressed: function,
       child: isPrefix
           ? Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ImageIcon(AssetImage(iconPath),color: AppColors.black,size:26,),
-                SizedBox(width: 8,),
+                ImageIcon(
+                  AssetImage(iconPath),
+                  color: AppColors.black,
+                  size: 26,
+                ),
+                SizedBox(width: 8),
                 Text(text, style: AppStyle.grey20Regular),
               ],
             )
-          : Text(text, style: AppStyle.grey20Regular),
+          : Text(text, style: style??AppStyle.grey20Regular),
     );
   }
 }
