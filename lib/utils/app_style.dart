@@ -43,4 +43,18 @@ abstract class AppStyle {
     color: AppColors.white,
     fontSize: 14,
   );
+  static TextStyle white20RobotoRegular = GoogleFonts.roboto(
+    color: AppColors.white,
+    fontSize: 20,
+  );
+  static TextStyle white36BoldRoboto = GoogleFonts.roboto(
+    color: AppColors.white,
+    fontSize: 36,
+    fontWeight: FontWeight.bold,
+  );
+  static TextStyle white24BoldRoboto = GoogleFonts.roboto(
+    color: AppColors.white,
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+  );
 }

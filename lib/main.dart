@@ -4,10 +4,12 @@ import 'package:movies_app/feature/auth/login_screen/login_screen.dart';
 import 'package:movies_app/feature/auth/register_screen/register_screen.dart';
 import 'package:movies_app/feature/onboarding_screen/provider/onboarding_provider.dart';
 import 'package:movies_app/providers/language_provider.dart';
+import 'package:movies_app/utils/app_colors.dart';
 import 'package:provider/provider.dart';
-
 import 'feature/auth/forget_pass_screen/forget_pass_screen.dart';
 import 'feature/home/home.dart';
+import 'feature/home/tabs/4-profile_screen/edit_profile_screen/edit_profile_screen.dart';
+import 'feature/home/tabs/4-profile_screen/profile_screen.dart';
 import 'feature/onboarding_screen/onboarding_screen.dart';
 import 'l10n/app_localizations.dart';
 
@@ -28,6 +30,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
+      theme: ThemeData(
+        pageTransitionsTheme: PageTransitionsTheme(
+          builders: {
+            TargetPlatform.android: ZoomPageTransitionsBuilder(
+              backgroundColor: AppColors.black,
+            ),
+          },
+        ),
+      ),
       locale: Locale(Provider.of<LanguageProvider>(context).currentLang),
       localizationsDelegates: [
         AppLocalizations.delegate,
@@ -41,6 +52,8 @@ class MyApp extends StatelessWidget {
         ForgetPassScreen.routeName: (context) => ForgetPassScreen(),
         RegisterScreen.routeName: (context) => RegisterScreen(),
         Home.routeName: (context) => Home(),
+        EditProfileScreen.routeName: (context) => EditProfileScreen(),
+        ProfileScreen.routeName: (context) => ProfileScreen(),
       },
     );
   }
