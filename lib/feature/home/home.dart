@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/feature/home/tabs/1-home_screen/home_screen.dart';
 import 'package:movies_app/feature/home/tabs/2-search_screen/search_screen.dart';
-import 'package:movies_app/feature/home/tabs/3-explore_screen/explore_screen.dart';
+import 'package:movies_app/feature/home/tabs/3-explore_screen/browse_screen.dart';
 import 'package:movies_app/feature/home/tabs/4-profile_screen/profile_screen.dart';
 import 'package:movies_app/utils/app_colors.dart';
 
@@ -9,9 +9,10 @@ class Home extends StatefulWidget {
   List<Widget> Screens = [
     HomeScreen(),
     SearchScreen(),
-    ExploreScreen(),
+    BrowseScreen(),
     ProfileScreen(),
   ];
+
   static const String routeName = "home";
 
   Home({super.key});
@@ -21,8 +22,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int selectedIndex = 0;
 
+   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,13 +31,12 @@ class _HomeState extends State<Home> {
 
       body: widget.Screens[selectedIndex],
       floatingActionButton: Container(
-        margin: EdgeInsets.symmetric(horizontal: 8),
+        margin: EdgeInsets.symmetric(horizontal: 4,vertical: 5),
         decoration: BoxDecoration(
           color: AppColors.grey,
           borderRadius: BorderRadius.all(Radius.circular(14)),
         ),
         child: DefaultTabController(
-
           initialIndex: selectedIndex,
           length: 4,
           child: TabBar(
@@ -75,7 +75,7 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
