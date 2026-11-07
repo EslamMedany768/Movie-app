@@ -28,7 +28,6 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-
       body: widget.Screens[selectedIndex],
       floatingActionButton: Container(
         margin: EdgeInsets.symmetric(horizontal: 4,vertical: 5),
