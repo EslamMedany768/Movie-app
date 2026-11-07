@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:movies_app/feature/auth/login_screen/login_screen.dart';
 import 'package:movies_app/feature/auth/register_screen/register_screen.dart';
+import 'package:movies_app/feature/home/tabs/1-home_screen/movie_details_screen.dart';
 import 'package:movies_app/feature/onboarding_screen/provider/onboarding_provider.dart';
 import 'package:movies_app/providers/language_provider.dart';
 import 'package:movies_app/utils/app_colors.dart';
@@ -33,9 +35,18 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         pageTransitionsTheme: PageTransitionsTheme(
           builders: {
-            TargetPlatform.android: ZoomPageTransitionsBuilder(
+            TargetPlatform.android:FadeForwardsPageTransitionsBuilder(backgroundColor: AppColors.black),
+            TargetPlatform.iOS:ZoomPageTransitionsBuilder(
               backgroundColor: AppColors.black,
             ),
+            // CupertinoPageTransitionsBuilder()
+            // PredictiveBackPageTransitionsBuilder(fallbackColor: AppColors.black)
+            // PredictiveBackFullscreenPageTransitionsBuilder(
+            //     fallbackColor: AppColors.black)
+            // OpenUpwardsPageTransitionsBuilder()
+            // FadeUpwardsPageTransitionsBuilder()
+
+
           },
         ),
       ),
@@ -48,6 +59,7 @@ class MyApp extends StatelessWidget {
       initialRoute: LoginScreen.routeName,
       routes: {
         OnboardingScreen.routeName: (context) => OnboardingScreen(),
+        MovieDetailsScreen.routeName: (context) => MovieDetailsScreen(),
         LoginScreen.routeName: (context) => LoginScreen(),
         ForgetPassScreen.routeName: (context) => ForgetPassScreen(),
         RegisterScreen.routeName: (context) => RegisterScreen(),
