@@ -57,4 +57,9 @@ abstract class AppStyle {
     fontSize: 24,
     fontWeight: FontWeight.bold,
   );
+  static TextStyle silverGrey20BoldRoboto = GoogleFonts.roboto(
+    color: AppColors.silverGrey,
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+  );
 }

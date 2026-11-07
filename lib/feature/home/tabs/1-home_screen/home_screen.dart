@@ -122,6 +122,8 @@ class HomeScreen extends StatelessWidget {
                     return Container(
                       width: size.width * 0.325,
                       child: CardMovieWidget(
+                        vertical: 2,
+                        horizontal: 4,
                         imagePath: "assets/images/1917_war_movie_image.png",
                       ),
                     );
