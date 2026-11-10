@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/feature/home/tabs/4-profile_screen/edit_profile_screen/edit_profile_screen.dart';
 import 'package:movies_app/feature/widgets/custom_elevated_button.dart';
-import 'package:movies_app/utils/app_colors.dart';
-import 'package:movies_app/utils/app_style.dart';
+
+
+import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_style.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const String routeName = "profile_screen";

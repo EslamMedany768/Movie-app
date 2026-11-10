@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../utils/app_colors.dart';
-import '../../../../../utils/app_style.dart';
+import '../../../../../core/utils/app_colors.dart';
+import '../../../../../core/utils/app_style.dart';
+
 
 class CustomTabBarWidget extends StatelessWidget {
   int selectedIndex;

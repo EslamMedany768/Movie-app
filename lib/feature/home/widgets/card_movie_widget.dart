@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/feature/home/tabs/1-home_screen/movie_details_screen.dart';
 
-import '../../../utils/app_colors.dart';
-import '../../../utils/app_style.dart';
+import '../../../core/utils/app_colors.dart';
+import '../../../core/utils/app_style.dart';
+
+
 
 class CardMovieWidget extends StatelessWidget {
   String imagePath;
@@ -25,7 +27,9 @@ class CardMovieWidget extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(18)),
               image: DecorationImage(
-                image: AssetImage(imagePath),
+                image: NetworkImage(
+                  "https://image.tmdb.org/t/p/w500/${imagePath}",
+                ),
                 fit: BoxFit.fill,
               ),
             ),

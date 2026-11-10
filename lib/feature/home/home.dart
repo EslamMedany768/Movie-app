@@ -3,7 +3,9 @@ import 'package:movies_app/feature/home/tabs/1-home_screen/home_screen.dart';
 import 'package:movies_app/feature/home/tabs/2-search_screen/search_screen.dart';
 import 'package:movies_app/feature/home/tabs/3-explore_screen/browse_screen.dart';
 import 'package:movies_app/feature/home/tabs/4-profile_screen/profile_screen.dart';
-import 'package:movies_app/utils/app_colors.dart';
+
+import '../../core/utils/app_colors.dart';
+
 
 class Home extends StatefulWidget {
   List<Widget> Screens = [

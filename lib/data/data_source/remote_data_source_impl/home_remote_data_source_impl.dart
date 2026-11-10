@@ -1,0 +1,36 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:injectable/injectable.dart';
+import 'package:movies_app/core/api/api_constant.dart';
+import 'package:movies_app/core/api/api_manager.dart';
+import 'package:movies_app/core/api/end_points.dart';
+import 'package:movies_app/data/model/PopularMovieDm.dart';
+import 'package:movies_app/domain/repositorty/data_sources/remote_data_source/home_remote_data_source.dart';
+
+import '../../../core/failures/failures.dart';
+import '../../../domain/entity/PopularMoviesEntity.dart';
+@Injectable(as: HomeRemoteDataSource)
+class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
+  ApiManager apiManager;
+  HomeRemoteDataSourceImpl({required this.apiManager});
+
+  @override
+  Future<Either<Failures, PopularMoviesEntity>> getMoviesPopular() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult.contains(ConnectivityResult.wifi) ||
+        connectivityResult.contains(ConnectivityResult.mobile)) {
+      var response = await apiManager.getData(
+        endPoint: EndPoints.apiRequestPopularMovies,
+      );
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        return Right(PopularMovieDm.fromJson(response.data));
+      } else {
+        return Left(ServerError(error: response.statusMessage!));
+      }
+    } else {
+      return Left(NetworkError(error: "Check Your Internet"));
+    }
+  }
+}

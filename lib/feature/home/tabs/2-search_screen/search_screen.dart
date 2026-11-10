@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/feature/widgets/custom_text_field.dart';
-import 'package:movies_app/utils/app_colors.dart';
-
+import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_style.dart';
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
 
