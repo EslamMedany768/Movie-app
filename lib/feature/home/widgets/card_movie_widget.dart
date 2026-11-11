@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/domain/entity/MoviesEntity.dart';
 import 'package:movies_app/feature/home/tabs/1-home_screen/movie_details_screen.dart';
 
-import '../../../utils/app_colors.dart';
-import '../../../utils/app_style.dart';
+import '../../../core/utils/app_colors.dart';
+import '../../../core/utils/app_style.dart';
+
+
 
 class CardMovieWidget extends StatelessWidget {
-  String imagePath;
+  MovieEntity movie;
   double vertical;
   double horizontal;
 
-  CardMovieWidget({super.key, required this.imagePath,this.vertical=3,this.horizontal=5});
+  CardMovieWidget({super.key, required this.movie,this.vertical=3,this.horizontal=5});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,9 @@ class CardMovieWidget extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(18)),
               image: DecorationImage(
-                image: AssetImage(imagePath),
+                image: NetworkImage(
+                  "https://image.tmdb.org/t/p/w500/${movie.posterPath}",
+                ),
                 fit: BoxFit.fill,
               ),
             ),
@@ -43,7 +48,7 @@ class CardMovieWidget extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "7.7",
+                    "${movie.voteAverage!.toDouble().toStringAsFixed(1)}",
                     style: AppStyle.white16Regular.copyWith(fontSize: 14),
                   ),
                   SizedBox(width: 2),

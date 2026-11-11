@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/feature/home/tabs/3-explore_screen/widgets/custom_tab_bar_widget.dart';
 import 'package:movies_app/feature/home/widgets/card_movie_widget.dart';
-import 'package:movies_app/utils/app_colors.dart';
-import 'package:movies_app/utils/app_style.dart';
+import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_style.dart';
 
 class BrowseScreen extends StatefulWidget {
   const BrowseScreen({super.key});
@@ -19,10 +19,10 @@ class _BrowseScreenState extends State<BrowseScreen> {
     var size = MediaQuery.of(context).size;
     return Container(
       color: AppColors.black,
-      child: SafeArea(
-        child: Column(
-          children: [
-            SizedBox(
+      child: Column(
+        children: [
+          SafeArea(
+            child: SizedBox(
               height: size.height * 0.09,
               child: DefaultTabController(
                 length: 5,
@@ -49,24 +49,25 @@ class _BrowseScreenState extends State<BrowseScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 8),
-            Expanded(
-              child: GridView.builder(
-                itemCount: 8,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 8,
-                  childAspectRatio: 0.66,
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 8),
-                itemBuilder: (context, index) {
-                  return CardMovieWidget(imagePath: "assets/images/black_widow_boster.png");
-                },
-              ),
-            ),SizedBox(height: size.height*0.07)
-          ],
-        ),
+          ),
+          SizedBox(height: 8),
+          // Expanded(
+          //   child: GridView.builder(
+          //     itemCount: 8,
+          //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          //       crossAxisCount: 2,
+          //       crossAxisSpacing: 16,
+          //       mainAxisSpacing: 8,
+          //       childAspectRatio: 0.66,
+          //     ),
+          //     padding: EdgeInsets.symmetric(horizontal: 8),
+          //     itemBuilder: (context, index) {
+          //       return CardMovieWidget(imagePath: "assets/images/black_widow_boster.png");
+          //     },
+          //   ),
+          // ),
+          SizedBox(height: size.height*0.07)
+        ],
       ),
     );
   }

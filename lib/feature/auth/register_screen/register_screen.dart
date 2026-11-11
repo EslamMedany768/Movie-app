@@ -2,15 +2,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/feature/auth/login_screen/login_screen.dart';
 import 'package:movies_app/feature/widgets/custom_elevated_button.dart';
-import 'package:movies_app/feature/widgets/custom_text_button.dart';
 import 'package:movies_app/feature/widgets/custom_text_field.dart';
 import 'package:movies_app/providers/language_provider.dart';
-import 'package:movies_app/utils/app_colors.dart';
-import 'package:movies_app/utils/app_style.dart';
 import 'package:provider/provider.dart';
-
+import '../../../core/utils/app_colors.dart';
+import '../../../core/utils/app_style.dart';
 import '../../../l10n/app_localizations.dart';
 
 class RegisterScreen extends StatelessWidget {
