@@ -1,5 +1,5 @@
-class PopularMoviesEntity {
-  PopularMoviesEntity({
+class MoviesResponseEntity {
+  MoviesResponseEntity({
       this.page, 
       this.results, 
       this.totalPages, 
@@ -7,7 +7,7 @@ class PopularMoviesEntity {
 
 
   num? page;
-  List<ResultsEntity>? results;
+  List<MovieEntity>? results;
   num? totalPages;
   num? totalResults;
 
@@ -15,8 +15,8 @@ class PopularMoviesEntity {
 
 }
 
-class ResultsEntity {
-  ResultsEntity({
+class MovieEntity {
+  MovieEntity({
       this.adult, 
       this.backdropPath, 
       this.genreIds, 

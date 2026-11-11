@@ -1,4 +1,4 @@
-abstract class Failures {
+ class Failures {
   String error;
 
   Failures({required this.error});

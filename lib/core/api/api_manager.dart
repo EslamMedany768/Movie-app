@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import 'package:movies_app/core/api/api_constant.dart';
 import 'package:movies_app/core/api/end_points.dart';
-import 'package:movies_app/data/model/PopularMovieDm.dart';
+import 'package:movies_app/data/model/MovieDm.dart';
 @singleton
 class ApiManager {
    Dio dio = Dio();

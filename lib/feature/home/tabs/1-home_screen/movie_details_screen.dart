@@ -152,48 +152,48 @@ class MovieDetailsScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        height: size.height * 0.32,
-                        width: size.width * 0.44,
-                        child: CardMovieWidget(
-                          vertical: 5,
-                          horizontal: 7,
-                          imagePath: "assets/images/Doctor_Strange_image.png",
-                        ),
-                      ),
-                      SizedBox(
-                        height: size.height * 0.32,
-                        width: size.width * 0.44,
-                        child: CardMovieWidget(
-                          vertical: 5,
-                          horizontal: 7,
-                          imagePath: "assets/images/Doctor_Strange_image.png",
-                        ),
-                      ),
+                      // SizedBox(
+                      //   height: size.height * 0.32,
+                      //   width: size.width * 0.44,
+                      //   child: CardMovieWidget(
+                      //     vertical: 5,
+                      //     horizontal: 7,
+                      //     imagePath: "assets/images/Doctor_Strange_image.png",
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: size.height * 0.32,
+                      //   width: size.width * 0.44,
+                      //   child: CardMovieWidget(
+                      //     vertical: 5,
+                      //     horizontal: 7,
+                      //     imagePath: "assets/images/Doctor_Strange_image.png",
+                      //   ),
+                      // ),
                     ],
                   ),
                   SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        height: size.height * 0.32,
-                        width: size.width * 0.44,
-                        child: CardMovieWidget(
-                          vertical: 5,
-                          horizontal: 7,
-                          imagePath: "assets/images/Doctor_Strange_image.png",
-                        ),
-                      ),
-                      SizedBox(
-                        height: size.height * 0.32,
-                        width: size.width * 0.44,
-                        child: CardMovieWidget(
-                          vertical: 5,
-                          horizontal: 7,
-                          imagePath: "assets/images/Doctor_Strange_image.png",
-                        ),
-                      ),
+                      // SizedBox(
+                      //   height: size.height * 0.32,
+                      //   width: size.width * 0.44,
+                      //   child: CardMovieWidget(
+                      //     vertical: 5,
+                      //     horizontal: 7,
+                      //     imagePath: "assets/images/Doctor_Strange_image.png",
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: size.height * 0.32,
+                      //   width: size.width * 0.44,
+                      //   child: CardMovieWidget(
+                      //     vertical: 5,
+                      //     horizontal: 7,
+                      //     imagePath: "assets/images/Doctor_Strange_image.png",
+                      //   ),
+                      // ),
                     ],
                   ),
                   SizedBox(height: 16),

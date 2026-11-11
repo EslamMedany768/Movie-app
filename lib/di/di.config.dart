@@ -21,6 +21,7 @@ import '../domain/repositorty/data_sources/remote_data_source/home_remote_data_s
     as _i810;
 import '../domain/repositorty/repositories/home_repository.dart' as _i802;
 import '../domain/use_cases/get_popular_movies_use_case.dart' as _i385;
+import '../domain/use_cases/get_specific_movies_use_case.dart' as _i1067;
 import '../feature/home/tabs/1-home_screen/cubit/home_screen_view_model.dart'
     as _i1001;
 
@@ -45,9 +46,15 @@ extension GetItInjectableX on _i174.GetIt {
         homeRepository: gh<_i802.HomeRepository>(),
       ),
     );
+    gh.factory<_i1067.GetSpecificMoviesUseCase>(
+      () => _i1067.GetSpecificMoviesUseCase(
+        homeRepository: gh<_i802.HomeRepository>(),
+      ),
+    );
     gh.factory<_i1001.HomeScreenViewModel>(
       () => _i1001.HomeScreenViewModel(
         getPopularMoviesUseCase: gh<_i385.GetPopularMoviesUseCase>(),
+        getSpecificMoviesUseCase: gh<_i1067.GetSpecificMoviesUseCase>(),
       ),
     );
     return this;

@@ -1,19 +1,29 @@
-import 'package:movies_app/domain/entity/PopularMoviesEntity.dart';
+import 'package:movies_app/domain/entity/MoviesEntity.dart';
 
 abstract class HomeScreenStates {}
 
-class HomeScreenGetPopularMoviesSuccessState extends HomeScreenStates {
-  PopularMoviesEntity response;
+class GetMoviesSuccessState extends HomeScreenStates {
+  MoviesResponseEntity response;
 
-  HomeScreenGetPopularMoviesSuccessState({required this.response});
+  GetMoviesSuccessState({required this.response});
 }
 
-class HomeScreenGetPopularMoviesErrorState extends HomeScreenStates {
+class GetPopularMoviesErrorState extends HomeScreenStates {
   String error;
 
-  HomeScreenGetPopularMoviesErrorState({required this.error});
+  GetPopularMoviesErrorState({required this.error});
 }
 
-class HomeScreenGetPopularMoviesLoadingState extends HomeScreenStates {
-  HomeScreenGetPopularMoviesLoadingState();
+
+class GetSpecificMoviesErrorState extends HomeScreenStates {
+  String error;
+
+  GetSpecificMoviesErrorState({required this.error});
+}
+
+class GetPopularMoviesLoadingState extends HomeScreenStates {
+  GetPopularMoviesLoadingState();
+}
+class GetSpecificMoviesLoading extends HomeScreenStates {
+  GetSpecificMoviesLoading();
 }

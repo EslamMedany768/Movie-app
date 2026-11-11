@@ -29,6 +29,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.black,
       resizeToAvoidBottomInset: false,
       body: widget.Screens[selectedIndex],
       floatingActionButton: Container(

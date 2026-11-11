@@ -13,6 +13,7 @@ import 'package:movies_app/feature/auth/register_screen/register_screen.dart';
 import 'package:movies_app/feature/home/tabs/1-home_screen/cubit/home_screen_view_model.dart';
 import 'package:movies_app/feature/home/tabs/1-home_screen/movie_details_screen.dart';
 import 'package:movies_app/feature/onboarding_screen/provider/onboarding_provider.dart';
+import 'package:movies_app/providers/change_bg_provider.dart';
 import 'package:movies_app/providers/language_provider.dart';
 
 import 'package:provider/provider.dart';
@@ -34,6 +35,7 @@ void main() {
       ],
       child: MultiProvider(
         providers: [
+          ChangeNotifierProvider(create: (context) => ChangeBgProvider(),),
           ChangeNotifierProvider(create: (context) => OnboardingProvider()),
           ChangeNotifierProvider(create: (context) => LanguageProvider()),
         ],

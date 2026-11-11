@@ -51,21 +51,22 @@ class _BrowseScreenState extends State<BrowseScreen> {
             ),
           ),
           SizedBox(height: 8),
-          Expanded(
-            child: GridView.builder(
-              itemCount: 8,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 8,
-                childAspectRatio: 0.66,
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              itemBuilder: (context, index) {
-                return CardMovieWidget(imagePath: "assets/images/black_widow_boster.png");
-              },
-            ),
-          ),SizedBox(height: size.height*0.07)
+          // Expanded(
+          //   child: GridView.builder(
+          //     itemCount: 8,
+          //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          //       crossAxisCount: 2,
+          //       crossAxisSpacing: 16,
+          //       mainAxisSpacing: 8,
+          //       childAspectRatio: 0.66,
+          //     ),
+          //     padding: EdgeInsets.symmetric(horizontal: 8),
+          //     itemBuilder: (context, index) {
+          //       return CardMovieWidget(imagePath: "assets/images/black_widow_boster.png");
+          //     },
+          //   ),
+          // ),
+          SizedBox(height: size.height*0.07)
         ],
       ),
     );

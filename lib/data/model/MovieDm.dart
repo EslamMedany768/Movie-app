@@ -1,19 +1,19 @@
-import 'package:movies_app/domain/entity/PopularMoviesEntity.dart';
+import 'package:movies_app/domain/entity/MoviesEntity.dart';
 
-class PopularMovieDm extends PopularMoviesEntity {
-  PopularMovieDm({
+class MovieResponseDm extends MoviesResponseEntity {
+  MovieResponseDm({
     super.page,
     super.results,
     super.totalPages,
     super.totalResults,
   });
 
-  PopularMovieDm.fromJson(dynamic json) {
+  MovieResponseDm.fromJson(dynamic json) {
     page = json['page'];
     if (json['results'] != null) {
       results = [];
       json['results'].forEach((v) {
-        results?.add(ResultsDm.fromJson(v));
+        results?.add(MovieDm.fromJson(v));
       });
     }
     totalPages = json['total_pages'];
@@ -23,8 +23,8 @@ class PopularMovieDm extends PopularMoviesEntity {
 
 }
 
-class ResultsDm extends ResultsEntity {
-  ResultsDm({
+class MovieDm extends MovieEntity {
+  MovieDm({
     super.adult,
     super.backdropPath,
     super.genreIds,
@@ -42,7 +42,7 @@ class ResultsDm extends ResultsEntity {
     super.voteCount,
   });
 
-  ResultsDm.fromJson(dynamic json) {
+  MovieDm.fromJson(dynamic json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'] != null ? json['genre_ids'].cast<num>() : [];
