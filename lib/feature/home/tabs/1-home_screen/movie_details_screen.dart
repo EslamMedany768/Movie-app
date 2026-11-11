@@ -4,8 +4,8 @@ import 'package:movies_app/feature/home/widgets/cast_widget.dart';
 import 'package:movies_app/feature/home/widgets/movie_statistics_container.dart';
 import 'package:movies_app/feature/home/widgets/genres_widget.dart';
 import 'package:movies_app/feature/widgets/custom_elevated_button.dart';
-import 'package:movies_app/utils/app_colors.dart';
-import 'package:movies_app/utils/app_style.dart';
+import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_style.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
   static const String routeName = "movie_details_screen";
@@ -152,48 +152,48 @@ class MovieDetailsScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        height: size.height * 0.32,
-                        width: size.width * 0.44,
-                        child: CardMovieWidget(
-                          vertical: 5,
-                          horizontal: 7,
-                          imagePath: "assets/images/Doctor_Strange_image.png",
-                        ),
-                      ),
-                      SizedBox(
-                        height: size.height * 0.32,
-                        width: size.width * 0.44,
-                        child: CardMovieWidget(
-                          vertical: 5,
-                          horizontal: 7,
-                          imagePath: "assets/images/Doctor_Strange_image.png",
-                        ),
-                      ),
+                      // SizedBox(
+                      //   height: size.height * 0.32,
+                      //   width: size.width * 0.44,
+                      //   child: CardMovieWidget(
+                      //     vertical: 5,
+                      //     horizontal: 7,
+                      //     imagePath: "assets/images/Doctor_Strange_image.png",
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: size.height * 0.32,
+                      //   width: size.width * 0.44,
+                      //   child: CardMovieWidget(
+                      //     vertical: 5,
+                      //     horizontal: 7,
+                      //     imagePath: "assets/images/Doctor_Strange_image.png",
+                      //   ),
+                      // ),
                     ],
                   ),
                   SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        height: size.height * 0.32,
-                        width: size.width * 0.44,
-                        child: CardMovieWidget(
-                          vertical: 5,
-                          horizontal: 7,
-                          imagePath: "assets/images/Doctor_Strange_image.png",
-                        ),
-                      ),
-                      SizedBox(
-                        height: size.height * 0.32,
-                        width: size.width * 0.44,
-                        child: CardMovieWidget(
-                          vertical: 5,
-                          horizontal: 7,
-                          imagePath: "assets/images/Doctor_Strange_image.png",
-                        ),
-                      ),
+                      // SizedBox(
+                      //   height: size.height * 0.32,
+                      //   width: size.width * 0.44,
+                      //   child: CardMovieWidget(
+                      //     vertical: 5,
+                      //     horizontal: 7,
+                      //     imagePath: "assets/images/Doctor_Strange_image.png",
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: size.height * 0.32,
+                      //   width: size.width * 0.44,
+                      //   child: CardMovieWidget(
+                      //     vertical: 5,
+                      //     horizontal: 7,
+                      //     imagePath: "assets/images/Doctor_Strange_image.png",
+                      //   ),
+                      // ),
                     ],
                   ),
                   SizedBox(height: 16),

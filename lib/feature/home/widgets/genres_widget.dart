@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:movies_app/utils/app_colors.dart';
-import 'package:movies_app/utils/app_style.dart';
+
+
+import '../../../core/utils/app_colors.dart';
+import '../../../core/utils/app_style.dart';
+
 
 class GenresWidget extends StatelessWidget {
   String text;
