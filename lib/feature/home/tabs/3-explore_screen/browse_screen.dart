@@ -20,23 +20,37 @@ class BrowseScreen extends StatefulWidget {
 }
 
 class _BrowseScreenState extends State<BrowseScreen> {
+
+  late BrowseScreenViewModel browseScreenViewModel;
+  late DefaultTabBarProvider provider;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    BlocProvider.of<BrowseScreenViewModel>(context).getGenreList();
+    initialFunc();
+  }
 
+  initialFunc() async {
 
+      browseScreenViewModel = BlocProvider.of<BrowseScreenViewModel>(
+        context,
+        listen: false,
+      );
+      provider = Provider.of<DefaultTabBarProvider>(context, listen: false);
+      await browseScreenViewModel.getGenreList();
+
+      if (browseScreenViewModel.isEmpty){
+        browseScreenViewModel.getSpecificMovies(
+          browseScreenViewModel.genreList![provider.selectedIndex].id.toString(),
+        );}
 
   }
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    BlocProvider.of<HomeScreenViewModel>(context).getSpecificMovies(
-      "${BlocProvider.of<BrowseScreenViewModel>(context).genreList![
-      Provider.of<DefaultTabBarProvider>(context).selectedIndex].id}",
-    );
+
     return Container(
       color: AppColors.black,
       child: Column(
@@ -48,7 +62,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
                 builder: (context, state) {
                   if (state is GetGenreListSuccessState) {
                     return CustomTabBarWidget(
-                      genreList: state.genreList.genres!,
+                      genreList:browseScreenViewModel.genreList!,
                     );
                   } else if (state is GetGenreListErrorState) {
                     return Text(
@@ -66,11 +80,11 @@ class _BrowseScreenState extends State<BrowseScreen> {
           ),
           SizedBox(height: 8),
           Expanded(
-            child: BlocBuilder<HomeScreenViewModel, HomeScreenStates>(
+            child: BlocBuilder<BrowseScreenViewModel, BrowseScreenStates>(
               builder: (context, state) {
-                if (state is GetMoviesSuccessState) {
+                if (state is GetGenreListSuccessState) {
                   return GridView.builder(
-                    itemCount: state.response.results!.length,
+                    itemCount: browseScreenViewModel.genreMovies!.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 16,
@@ -80,11 +94,11 @@ class _BrowseScreenState extends State<BrowseScreen> {
                     padding: EdgeInsets.symmetric(horizontal: 8),
                     itemBuilder: (context, index) {
                       return CardMovieWidget(
-                        movie: state.response.results![index],
+                        movie: browseScreenViewModel.genreMovies![index],
                       );
                     },
                   );
-                } else if (state is GetSpecificMoviesErrorState) {
+                } else if (state is DiscoverMoviesGetSpecificMoviesErrorState) {
                   return Text(
                     state.error,
                     style: AppStyle.white20RobotoRegular,

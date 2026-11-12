@@ -84,6 +84,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i983.BrowseScreenViewModel>(
       () => _i983.BrowseScreenViewModel(
         genreListUseCase: gh<_i867.GetGenreListUseCase>(),
+        getSpecificMoviesUseCase: gh<_i1067.GetSpecificMoviesUseCase>(),
       ),
     );
     return this;

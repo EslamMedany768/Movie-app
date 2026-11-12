@@ -5,6 +5,7 @@ import 'package:movies_app/data/repository/home_repository_impl.dart';
 import 'package:movies_app/domain/use_cases/get_popular_movies_use_case.dart';
 import 'package:movies_app/domain/use_cases/get_specific_movies_use_case.dart';
 
+import '../../../../../domain/entity/MoviesEntity.dart';
 import 'home_screen_states.dart';
 
 @injectable
@@ -40,9 +41,8 @@ class HomeScreenViewModel extends Cubit<HomeScreenStates> {
       },
       (response) {
         emit(GetMoviesSuccessState(response: response));
+
       },
     );
   }
-
-
 }

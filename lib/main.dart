@@ -17,6 +17,7 @@ import 'package:movies_app/feature/onboarding_screen/provider/onboarding_provide
 import 'package:movies_app/providers/change_bg_provider.dart';
 import 'package:movies_app/providers/default_tab_bar_provider.dart';
 import 'package:movies_app/providers/language_provider.dart';
+import 'package:movies_app/providers/navigate_screens_provider.dart';
 
 import 'package:provider/provider.dart';
 import 'core/utils/app_colors.dart';
@@ -39,6 +40,7 @@ void main() {
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => ChangeBgProvider()),
+          ChangeNotifierProvider(create: (context) => NavigateScreensProvider()),
           ChangeNotifierProvider(create: (context) => DefaultTabBarProvider()),
           ChangeNotifierProvider(create: (context) => OnboardingProvider()),
           ChangeNotifierProvider(create: (context) => LanguageProvider()),

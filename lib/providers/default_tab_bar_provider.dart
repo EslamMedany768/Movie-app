@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class DefaultTabBarProvider extends ChangeNotifier {
   int selectedIndex = 0;
 
-  void updateIndex(int newIndex) {
+   updateIndex(int newIndex) {
     if (newIndex == selectedIndex) {
       return;
     }

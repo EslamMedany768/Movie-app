@@ -1,18 +1,27 @@
 import 'package:movies_app/domain/entity/GenreListEntity.dart';
 
- class BrowseScreenStates {}
+import '../../../../../domain/entity/MoviesEntity.dart';
 
-class GetGenreListSuccessState extends BrowseScreenStates{
+class BrowseScreenStates {}
 
-  GenreListEntity genreList;
+class GetGenreListSuccessState extends BrowseScreenStates {
+  GenreListEntity? genreList;
 
-  GetGenreListSuccessState({required this.genreList});
+  GetGenreListSuccessState({ this.genreList});
 }
 
-class GetGenreListErrorState extends BrowseScreenStates{
+class GetGenreListErrorState extends BrowseScreenStates {
   String error;
 
   GetGenreListErrorState({required this.error});
 }
 
-class GetGenreListLoadingState extends BrowseScreenStates{}
+class GetGenreListLoadingState extends BrowseScreenStates {}
+
+class DiscoverMoviesGetSpecificMoviesErrorState extends BrowseScreenStates {
+  String error;
+
+  DiscoverMoviesGetSpecificMoviesErrorState({required this.error});
+}
+
+
