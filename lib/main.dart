@@ -12,8 +12,10 @@ import 'package:movies_app/feature/auth/login_screen/login_screen.dart';
 import 'package:movies_app/feature/auth/register_screen/register_screen.dart';
 import 'package:movies_app/feature/home/tabs/1-home_screen/cubit/home_screen_view_model.dart';
 import 'package:movies_app/feature/home/tabs/1-home_screen/movie_details_screen.dart';
+import 'package:movies_app/feature/home/tabs/3-explore_screen/cubit/browse_screen_view_model.dart';
 import 'package:movies_app/feature/onboarding_screen/provider/onboarding_provider.dart';
 import 'package:movies_app/providers/change_bg_provider.dart';
+import 'package:movies_app/providers/default_tab_bar_provider.dart';
 import 'package:movies_app/providers/language_provider.dart';
 
 import 'package:provider/provider.dart';
@@ -31,11 +33,13 @@ void main() {
   runApp(
     MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => getIt<BrowseScreenViewModel>()),
         BlocProvider(create: (context) => getIt<HomeScreenViewModel>()),
       ],
       child: MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (context) => ChangeBgProvider(),),
+          ChangeNotifierProvider(create: (context) => ChangeBgProvider()),
+          ChangeNotifierProvider(create: (context) => DefaultTabBarProvider()),
           ChangeNotifierProvider(create: (context) => OnboardingProvider()),
           ChangeNotifierProvider(create: (context) => LanguageProvider()),
         ],

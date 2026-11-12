@@ -25,6 +25,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         connectivityResult.contains(ConnectivityResult.mobile)) {
       var response = await apiManager.getData(
         endPoint: EndPoints.apiRequestPopularMovies,
+        headers: {"Authorization": "Bearer ${ApiConstant.token}"},
       );
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
         return Right(MovieResponseDm.fromJson(response.data));
@@ -37,13 +38,16 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   }
 
   @override
-  Future<Either<Failures, MoviesResponseEntity>> getSpecificMovies(categoryId) async {
+  Future<Either<Failures, MoviesResponseEntity>> getSpecificMovies(
+    categoryId,
+  ) async {
     try {
       var connectivityResult = await Connectivity().checkConnectivity();
       if (connectivityResult.contains(ConnectivityResult.wifi) ||
           connectivityResult.contains(ConnectivityResult.mobile)) {
         var response = await apiManager.getData(
           endPoint: EndPoints.apiRequestSpecificMovies + categoryId,
+          headers: {"Authorization": "Bearer ${ApiConstant.token}"},
         );
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
           return Right(MovieResponseDm.fromJson(response.data));
