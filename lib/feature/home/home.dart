@@ -3,9 +3,10 @@ import 'package:movies_app/feature/home/tabs/1-home_screen/home_screen.dart';
 import 'package:movies_app/feature/home/tabs/2-search_screen/search_screen.dart';
 import 'package:movies_app/feature/home/tabs/3-explore_screen/browse_screen.dart';
 import 'package:movies_app/feature/home/tabs/4-profile_screen/profile_screen.dart';
+import 'package:movies_app/providers/navigate_screens_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../core/utils/app_colors.dart';
-
 
 class Home extends StatefulWidget {
   List<Widget> Screens = [
@@ -24,27 +25,25 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
-   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<NavigateScreensProvider>(context);
     return Scaffold(
       backgroundColor: AppColors.black,
       resizeToAvoidBottomInset: false,
-      body: widget.Screens[selectedIndex],
+      body: widget.Screens[provider.selectedIndex],
       floatingActionButton: Container(
-        margin: EdgeInsets.symmetric(horizontal: 4,vertical: 5),
+        margin: EdgeInsets.symmetric(horizontal: 4, vertical: 5),
         decoration: BoxDecoration(
           color: AppColors.grey,
           borderRadius: BorderRadius.all(Radius.circular(14)),
         ),
         child: DefaultTabController(
-          initialIndex: selectedIndex,
+          initialIndex: provider.selectedIndex,
           length: 4,
           child: TabBar(
             onTap: (value) {
-              selectedIndex = value;
-              setState(() {});
+              provider.updateIndex(value);
             },
 
             overlayColor: WidgetStatePropertyAll(Colors.transparent),
@@ -56,22 +55,30 @@ class _HomeState extends State<Home> {
               ImageIcon(
                 AssetImage("assets/images/home_icon.png"),
                 size: 24,
-                color: selectedIndex == 0 ? AppColors.orange : AppColors.white,
+                color: provider.selectedIndex == 0
+                    ? AppColors.orange
+                    : AppColors.white,
               ),
               ImageIcon(
                 AssetImage("assets/images/search_icon.png"),
                 size: 22,
-                color: selectedIndex == 1 ? AppColors.orange : AppColors.white,
+                color: provider.selectedIndex == 1
+                    ? AppColors.orange
+                    : AppColors.white,
               ),
               ImageIcon(
                 AssetImage("assets/images/explore_icon.png"),
                 size: 22,
-                color: selectedIndex == 2 ? AppColors.orange : AppColors.white,
+                color: provider.selectedIndex == 2
+                    ? AppColors.orange
+                    : AppColors.white,
               ),
               ImageIcon(
                 AssetImage("assets/images/Profile_icon.png"),
                 size: 22,
-                color: selectedIndex == 3 ? AppColors.orange : AppColors.white,
+                color: provider.selectedIndex == 3
+                    ? AppColors.orange
+                    : AppColors.white,
               ),
             ],
           ),

@@ -14,11 +14,13 @@ import 'package:movies_app/feature/home/tabs/1-home_screen/cubit/home_screen_sta
 import 'package:movies_app/feature/home/tabs/1-home_screen/cubit/home_screen_view_model.dart';
 import 'package:movies_app/feature/home/widgets/card_movie_widget.dart';
 import 'package:movies_app/providers/change_bg_provider.dart';
+import 'package:movies_app/providers/navigate_screens_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/api/api_constant.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_style.dart';
+import '../3-explore_screen/cubit/browse_screen_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -38,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var navigateProvider=Provider.of<NavigateScreensProvider>(context);
     var viewModel = BlocProvider.of<HomeScreenViewModel>(context);
     var provider = Provider.of<ChangeBgProvider>(context);
     var size = MediaQuery.of(context).size;
@@ -128,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Spacer(),
                         InkWell(
                           onTap: () {
-                            ///todo:Navigate to browse_screen
+                            navigateProvider.updateIndex(2);
                           },
                           child: Row(
                             children: [
