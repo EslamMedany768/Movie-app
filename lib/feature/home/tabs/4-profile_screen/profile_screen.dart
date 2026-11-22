@@ -1,18 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/feature/auth/login_screen/login_screen.dart';
+import 'package:movies_app/feature/home/tabs/4-profile_screen/cubit/profile_screen_view_model.dart';
+import 'package:movies_app/feature/home/tabs/4-profile_screen/cubit/profile_states.dart';
 import 'package:movies_app/feature/home/tabs/4-profile_screen/edit_profile_screen/edit_profile_screen.dart';
+import 'package:movies_app/feature/home/widgets/card_movie_widget.dart';
 import 'package:movies_app/feature/widgets/custom_elevated_button.dart';
-
+import 'package:movies_app/providers/discover_tab_bar_provider.dart';
+import 'package:movies_app/providers/navigate_screens_provider.dart';
+import 'package:movies_app/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_style.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   static const String routeName = "profile_screen";
 
   const ProfileScreen({super.key});
 
   @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  late ProfileViewModel viewModel;
+  late UserProvider userProvider;
+
+  @override
+  void initState() {  print("PROFILE INIT STATE");
+    // TODO: implement initState
+    super.initState();
+    viewModel = BlocProvider.of<ProfileViewModel>(context, listen: false);
+    userProvider = Provider.of<UserProvider>(context, listen: false);
+    viewModel.getMoviesHistory(userProvider.currentUser!);
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    print("PROFILE DISPOSE");
+    super.dispose();
+
+  }
+
+  @override
   Widget build(BuildContext context) {
+    userProvider = Provider.of<UserProvider>(context);
     var size = MediaQuery.of(context).size;
     return Column(
       children: [
@@ -31,13 +64,15 @@ class ProfileScreen extends StatelessWidget {
                       children: [
                         ClipRRect(
                           child: Image.asset(
-                            "assets/images/gamer 1.png",
+                            userProvider.currentUser!.image ??
+                                "assets/images/gamer 1.png",
                             height: size.height * 0.15,
+                            fit: BoxFit.fill,
                           ),
                         ),
                         SizedBox(height: 8),
                         Text(
-                          "John Safwat",
+                          userProvider.currentUser!.name!,
                           style: AppStyle.white14Roboto.copyWith(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -54,7 +89,20 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     Column(
                       children: [
-                        Text("12", style: AppStyle.white36BoldRoboto),
+                        BlocBuilder<ProfileViewModel, ProfileHistoryStates>(
+                          builder: (context, state) {
+                            if (state is GetMovieHistorySuccessState) {
+                              return Text(
+                                state.moviesHistory.length.toString(),
+                                style: AppStyle.white36BoldRoboto,
+                              );
+                            } else {
+                              return CircularProgressIndicator(
+                                color: AppColors.orange,
+                              );
+                            }
+                          },
+                        ),
                         SizedBox(height: 8),
                         Text("History", style: AppStyle.white24BoldRoboto),
                       ],
@@ -88,7 +136,17 @@ class ProfileScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Provider.of<NavigateScreensProvider>(
+                            context,
+                            listen: false,
+                          ).updateIndex(0);
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                            LoginScreen.routeName,
+                            (route) => false,
+                          );
+                          userProvider.currentUser = null;
+                        },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -117,7 +175,7 @@ class ProfileScreen extends StatelessWidget {
         Container(
           color: AppColors.offBlack,
           child: DefaultTabController(
-            initialIndex: 0,
+            initialIndex: 1,
             length: 2,
             child: TabBar(
               overlayColor: WidgetStatePropertyAll(Colors.transparent),
@@ -148,7 +206,7 @@ class ProfileScreen extends StatelessWidget {
                       size: 40,
                     ),
                     Text(
-                      "Watch List",
+                      "History",
                       style: AppStyle.white14Roboto.copyWith(fontSize: 20),
                     ),
                   ],
@@ -160,9 +218,45 @@ class ProfileScreen extends StatelessWidget {
 
         ///todo: do logic here
         Expanded(
-          child: Container(
-            color: AppColors.black,
-            child: Image.asset("assets/images/empty_icon.png"),
+          child: BlocBuilder<ProfileViewModel, ProfileHistoryStates>(
+            builder: (context, state) {
+              if (state is GetMovieHistorySuccessState) {
+                return state.moviesHistory.isEmpty?  Image.asset("assets/images/empty_icon.png"):GridView.builder(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: size.width * 0.02,
+                    vertical: size.height * 0.015,
+                  ),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: size.height * 0.018,
+                    crossAxisSpacing: size.width * 0.04,
+                    childAspectRatio: 1 / 1.34,
+                  ),
+                  itemCount: state.moviesHistory.length,
+                  itemBuilder: (context, index) {
+
+                    return SizedBox(
+                      child: CardMovieWidget(movie: state.moviesHistory[index]),
+                    );
+                  },
+                );
+              } else if (state is GetMovieHistoryErrorState) {
+                return Center(
+                  child: Text(
+                    state.error,
+                    style: AppStyle.white20RobotoRegular,
+                  ),
+                );
+              } else if (state is GetMovieHistoryLoadingState) {
+                return Center(
+                  child: CircularProgressIndicator(color: AppColors.orange),
+                );
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(color: AppColors.orange),
+                );
+              }
+            },
           ),
         ),
       ],

@@ -19,11 +19,11 @@ class MovieResponseDm extends MoviesResponseEntity {
     totalPages = json['total_pages'];
     totalResults = json['total_results'];
   }
-
-
 }
 
 class MovieDm extends MovieEntity {
+  static String historyCollection = "History";
+
   MovieDm({
     super.adult,
     super.backdropPath,
@@ -41,6 +41,40 @@ class MovieDm extends MovieEntity {
     super.voteAverage,
     super.voteCount,
   });
+
+  MovieDm.fromMovieEntity(MovieEntity movieEntity) {
+    id = movieEntity.id;
+    title = movieEntity.title;
+    genreIds=movieEntity.genreIds;
+    adult=movieEntity.adult;
+    backdropPath=movieEntity.backdropPath;
+    originalLanguage = movieEntity.originalLanguage;
+    originalTitle = movieEntity.originalTitle;
+    overview = movieEntity.overview;
+    popularity = movieEntity.popularity;
+    posterPath = movieEntity.posterPath;
+    releaseDate = movieEntity.releaseDate;
+    softcore = movieEntity.softcore;
+    video = movieEntity.video;
+    voteAverage = movieEntity.voteAverage;
+    voteCount = movieEntity.voteCount;
+  }
+  MovieEntity toMovieEntity(){
+   return MovieEntity(
+      id: id,
+      title: title,
+      originalLanguage: originalLanguage,
+      originalTitle: originalTitle,
+      overview: overview,
+      popularity: popularity,
+      posterPath: posterPath,
+      releaseDate: releaseDate,
+      softcore: softcore,
+      video: video,
+      voteAverage: voteAverage,
+      voteCount: voteCount,
+    );
+  }
 
   MovieDm.fromJson(dynamic json) {
     adult = json['adult'];
@@ -60,5 +94,23 @@ class MovieDm extends MovieEntity {
     voteCount = json['vote_count'];
   }
 
-
+  static Map<String, dynamic> toJson(MovieDm movie) {
+    return {
+      "adult": movie.adult,
+      "backdrop_path": movie.backdropPath,
+      "genre_ids": movie.genreIds,
+      "id": movie.id,
+      "title": movie.title,
+      "original_language": movie.originalLanguage,
+      "original_title": movie.originalTitle,
+      "overview": movie.overview,
+      "popularity": movie.popularity,
+      "poster_path": movie.posterPath,
+      "release_date": movie.releaseDate,
+      "softcore": movie.softcore,
+      "video": movie.video,
+      "vote_average": movie.voteAverage,
+      "vote_count": movie.voteCount,
+    };
+  }
 }
