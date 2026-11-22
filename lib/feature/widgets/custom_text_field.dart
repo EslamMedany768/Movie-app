@@ -3,19 +3,25 @@ import 'package:flutter/material.dart';
 import '../../core/utils/app_colors.dart';
 import '../../core/utils/app_style.dart';
 
-
 class CustomTextField extends StatefulWidget {
+  TextEditingController? controller;
   IconData? prefixIcon;
   String text;
   bool isSuffix;
   bool isObscure;
-
+  TextInputType? keyboardType;
+  String? Function(String? value)? validator;
+  void Function(String value)? function;
   CustomTextField({
     super.key,
     required this.text,
+    this.function,
+    this.keyboardType,
+    this.validator,
+    this.controller,
     required this.prefixIcon,
     this.isSuffix = false,
-    this.isObscure=false
+    this.isObscure = false,
   });
 
   @override
@@ -23,10 +29,13 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: widget.keyboardType,
+      validator: widget.validator,
+      onChanged: widget.function,
+      controller: widget.controller,
       obscureText: widget.isObscure,
       cursorColor: AppColors.white,
       style: AppStyle.white16Regular.copyWith(decorationThickness: 0),
@@ -40,10 +49,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
         suffixIcon: widget.isSuffix
             ? IconButton(
                 onPressed: () {
-                  widget. isObscure = !widget.isObscure;
-                  setState(() {
-
-                  });
+                  widget.isObscure = !widget.isObscure;
+                  setState(() {});
                 },
                 icon: widget.isObscure
                     ? ImageIcon(
@@ -57,11 +64,18 @@ class _CustomTextFieldState extends State<CustomTextField> {
           borderRadius: BorderRadius.all(Radius.circular(16)),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(16)),
+          borderRadius: BorderRadius.all(Radius.circular(16),),          borderSide: BorderSide(color: AppColors.red)
+
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(16)),
         ),
+        focusedErrorBorder:  OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(16)),
+          borderSide: BorderSide(color: AppColors.red)
+        ),
+
+
       ),
     );
   }

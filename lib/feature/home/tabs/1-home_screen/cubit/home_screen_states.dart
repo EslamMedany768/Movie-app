@@ -3,9 +3,7 @@ import 'package:movies_app/domain/entity/MoviesEntity.dart';
 abstract class HomeScreenStates {}
 
 class GetMoviesSuccessState extends HomeScreenStates {
-  MoviesResponseEntity response;
 
-  GetMoviesSuccessState({required this.response});
 }
 
 class GetPopularMoviesErrorState extends HomeScreenStates {

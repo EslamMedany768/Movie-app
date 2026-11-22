@@ -10,9 +10,11 @@ import 'home_screen_states.dart';
 
 @injectable
 class HomeScreenViewModel extends Cubit<HomeScreenStates> {
+  List<MovieEntity> popularMovies = [];
+  List<MovieEntity> actionMovies = [];
+
   GetPopularMoviesUseCase getPopularMoviesUseCase;
   GetSpecificMoviesUseCase getSpecificMoviesUseCase;
-
 
   HomeScreenViewModel({
     required this.getPopularMoviesUseCase,
@@ -27,7 +29,10 @@ class HomeScreenViewModel extends Cubit<HomeScreenStates> {
         emit(GetPopularMoviesErrorState(error: error.error));
       },
       (response) {
-        emit(GetMoviesSuccessState(response: response));
+
+          popularMovies = response.results!;
+
+        emit(GetMoviesSuccessState());
       },
     );
   }
@@ -40,8 +45,8 @@ class HomeScreenViewModel extends Cubit<HomeScreenStates> {
         emit(GetSpecificMoviesErrorState(error: error.error));
       },
       (response) {
-        emit(GetMoviesSuccessState(response: response));
-
+        actionMovies = response.results!;
+        emit(GetMoviesSuccessState());
       },
     );
   }

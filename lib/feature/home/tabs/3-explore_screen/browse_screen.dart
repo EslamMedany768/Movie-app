@@ -6,7 +6,7 @@ import 'package:movies_app/feature/home/tabs/3-explore_screen/cubit/browse_scree
 import 'package:movies_app/feature/home/tabs/3-explore_screen/cubit/browse_screen_view_model.dart';
 import 'package:movies_app/feature/home/tabs/3-explore_screen/widgets/custom_tab_bar_widget.dart';
 import 'package:movies_app/feature/home/widgets/card_movie_widget.dart';
-import 'package:movies_app/providers/default_tab_bar_provider.dart';
+import 'package:movies_app/providers/discover_tab_bar_provider.dart';
 
 import 'package:provider/provider.dart';
 import '../../../../core/utils/app_colors.dart';
@@ -22,7 +22,7 @@ class BrowseScreen extends StatefulWidget {
 class _BrowseScreenState extends State<BrowseScreen> {
 
   late BrowseScreenViewModel browseScreenViewModel;
-  late DefaultTabBarProvider provider;
+  late DiscoverTabBarProvider provider;
 
   @override
   void initState() {
@@ -37,13 +37,12 @@ class _BrowseScreenState extends State<BrowseScreen> {
         context,
         listen: false,
       );
-      provider = Provider.of<DefaultTabBarProvider>(context, listen: false);
+      provider = Provider.of<DiscoverTabBarProvider>(context, listen: false);
       await browseScreenViewModel.getGenreList();
+      browseScreenViewModel.getSpecificMovies(
+        browseScreenViewModel.genreList![provider.selectedIndex].id.toString(),
+      );
 
-      if (browseScreenViewModel.isEmpty){
-        browseScreenViewModel.getSpecificMovies(
-          browseScreenViewModel.genreList![provider.selectedIndex].id.toString(),
-        );}
 
   }
 
@@ -84,6 +83,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
               builder: (context, state) {
                 if (state is GetGenreListSuccessState) {
                   return GridView.builder(
+
                     itemCount: browseScreenViewModel.genreMovies!.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,

@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_style.dart';
 import '../../../../../domain/entity/GenreListEntity.dart';
-import '../../../../../providers/default_tab_bar_provider.dart';
+import '../../../../../providers/discover_tab_bar_provider.dart';
 import '../../1-home_screen/cubit/home_screen_view_model.dart';
 import '../cubit/browse_screen_view_model.dart';
 
@@ -20,20 +20,20 @@ class CustomTabBarWidget extends StatefulWidget {
 }
 
 class _CustomTabBarWidgetState extends State<CustomTabBarWidget> {
-  late DefaultTabBarProvider provider;
+  late DiscoverTabBarProvider provider;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    provider = Provider.of<DefaultTabBarProvider>(context, listen: false);
+    provider = Provider.of<DiscoverTabBarProvider>(context, listen: false);
     // provider.selectedIndex = 0;
   }
 
   @override
   Widget build(BuildContext context) {
     var viewModel = BlocProvider.of<BrowseScreenViewModel>(context);
-    provider = Provider.of<DefaultTabBarProvider>(context);
+    provider = Provider.of<DiscoverTabBarProvider>(context);
 
     return DefaultTabController(
       initialIndex: provider.selectedIndex,

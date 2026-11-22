@@ -36,7 +36,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login_with_google => 'Login With Google';
 
   @override
-  String get confirm_password => 'Password';
+  String get confirm_password => 'Re-Password';
 
   @override
   String get phone_number => 'Phone Number';

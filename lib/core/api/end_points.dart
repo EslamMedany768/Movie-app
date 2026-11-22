@@ -8,4 +8,10 @@ class EndPoints {
       "/3/discover/movie?include"
       "_adult=false&include_video=false&language=en-US&page=1&"
       "sort_by=popularity.desc&with_genres=";
+  static const String apiRequestMovieDetails =
+      "/3/movie/";
+  static const String apiRequestSearchMovie =
+      "/3/search/movie";
+
+
 }

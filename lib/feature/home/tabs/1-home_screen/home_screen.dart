@@ -30,166 +30,175 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late HomeScreenViewModel viewModel;
+
   @override
   void initState() {
+
     // TODO: implement initState
-    Provider.of<ChangeBgProvider>(context, listen: false).selectedIndex = 0;
-    BlocProvider.of<HomeScreenViewModel>(context).getPopularMovies();
-    BlocProvider.of<HomeScreenViewModel>(context).getSpecificMovies("28");
+
+    Provider
+        .of<ChangeBgProvider>(context, listen: false)
+        .selectedIndex = 0;
+
+    initialPage();
+
+  }
+  initialPage()async{
+   await BlocProvider.of<HomeScreenViewModel>(context).getPopularMovies();
+   BlocProvider.of<HomeScreenViewModel>(context).getSpecificMovies("28");
   }
 
+
   @override
-  Widget build(BuildContext context) {
-    var navigateProvider=Provider.of<NavigateScreensProvider>(context);
-    var viewModel = BlocProvider.of<HomeScreenViewModel>(context);
+  Widget build(BuildContext context) { viewModel = BlocProvider.of<HomeScreenViewModel>(context);
+    var navigateProvider = Provider.of<NavigateScreensProvider>(context);
     var provider = Provider.of<ChangeBgProvider>(context);
     var size = MediaQuery.of(context).size;
-    return BlocBuilder(
-      bloc: BlocProvider.of<HomeScreenViewModel>(context),
-      builder: (context, state) {
-        if (state is GetMoviesSuccessState) {
-          return Container(
-            color: AppColors.black,
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Stack(
-                    children: [
-                      Container(
-                        height: size.height * 0.77,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(
-                              "https://image.tmdb.org/t/p/w500/${state.response.results![provider.selectedIndex].posterPath}",
-                            ),
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                AppColors.black.withOpacity(.8),
-                                AppColors.black.withOpacity(.6),
-                                AppColors.black,
-                              ],
-                              begin: AlignmentGeometry.topCenter,
-                              end: AlignmentGeometry.bottomCenter,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: -10,
-                        right: 0,
-                        left: 0,
-                        child: Image.asset(
-                          "assets/images/Available_Now_image.png",
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 6,
-                        right: 0,
-                        left: 0,
-                        child: Image.asset("assets/images/Watch_Now_image.png"),
-                      ),
-                      Positioned(
-                        top: size.height * 0.15,
-                        left: 0,
-                        right: 0,
-                        child: CarouselSlider.builder(
-                          itemCount: state.response.results!.length,
-                          itemBuilder: (context, index, realIndex) {
-                            return Container(
-                              margin: EdgeInsets.symmetric(horizontal: 4),
-                              child: CardMovieWidget(
-                                movie: state.response.results![index],
-                              ),
-                            );
-                          },
+    return BlocBuilder<HomeScreenViewModel,HomeScreenStates>(
+    builder: (context, state) {
+    if (state is GetMoviesSuccessState) {
+    return Container(
+    color: AppColors.black,
+    child: SingleChildScrollView(
+    child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+    Stack(
+    children: [
+    Container(
+    height: size.height * 0.77,
+    decoration: BoxDecoration(
+    image: DecorationImage(
+    image: NetworkImage(
+    "https://image.tmdb.org/t/p/w500/${viewModel.popularMovies[provider.selectedIndex].posterPath}",
+    ),
+    fit: BoxFit.fill,
+    ),
+    ),
+    child: Container(
+    decoration: BoxDecoration(
+    gradient: LinearGradient(
+    colors: [
+    AppColors.black.withOpacity(.8),
+    AppColors.black.withOpacity(.6),
+    AppColors.black,
+    ],
+    begin: AlignmentGeometry.topCenter,
+    end: AlignmentGeometry.bottomCenter,
+    ),
+    ),
+    ),
+    ),
+    Positioned(
+    top: 5,
+    right: 0,
+    left: 0,
+    child: Image.asset(
+    "assets/images/Available_Now_image.png",
+    ),
+    ),
+    Positioned(
+    bottom: 6,
+    right: 0,
+    left: 0,
+    child: Image.asset("assets/images/Watch_Now_image.png"),
+    ),
+    Positioned(
+    top: size.height * 0.15,
+    left: 0,
+    right: 0,
+    child: CarouselSlider.builder(
+    itemCount: viewModel.popularMovies.length,
+    itemBuilder: (context, index, realIndex) {
+    return Container(
+    margin: EdgeInsets.symmetric(horizontal: 4),
+    child: CardMovieWidget(
+    movie: viewModel.popularMovies[index],
+    ),
+    );
+    },
 
-                          options: CarouselOptions(
-                            height: size.height * 0.39,
-                            viewportFraction: .55,
-                            enlargeFactor: 0.27,
-                            enlargeCenterPage: true,
-                            onPageChanged: (index, reason) {
-                              provider.changeBG(index);
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    child: Row(
-                      children: [
-                        Text("Action", style: AppStyle.white20RobotoRegular),
-                        Spacer(),
-                        InkWell(
-                          onTap: () {
-                            navigateProvider.updateIndex(2);
-                          },
-                          child: Row(
-                            children: [
-                              Text(
-                                "See More ",
-                                style: AppStyle.white20RobotoRegular.copyWith(
-                                  color: AppColors.orange,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              Icon(
-                                Icons.arrow_forward,
-                                color: AppColors.orange,
-                                size: 16,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: size.height * 0.01),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    child: SizedBox(
-                      height: size.height * 0.23,
-                      child: ListView.separated(
-                        separatorBuilder: (context, index) =>
-                            SizedBox(width: 16),
-                        scrollDirection: Axis.horizontal,
-                        itemCount: state.response.results!.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            width: size.width * 0.325,
-                            child: CardMovieWidget(
-                              vertical: 2,
-                              horizontal: 4,
-                              movie:
-                                  state.response.results![index],
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: size.height * 0.1),
-                ],
-              ),
-            ),
-          );
-        } else if (state is GetPopularMoviesErrorState) {
-          return Text("error", style: AppStyle.white20RobotoRegular);
-        } else {
-          return Center(
-            child: CircularProgressIndicator(color: AppColors.white),
-          );
-        }
-      },
+    options: CarouselOptions(
+    height: size.height * 0.39,
+    viewportFraction: .55,
+    enlargeFactor: 0.27,
+    enlargeCenterPage: true,
+    onPageChanged: (index, reason) {
+    provider.changeBG(index);
+    },
+    ),
+    ),
+    ),
+    ],
+    ),
+    Padding(
+    padding: EdgeInsets.symmetric(horizontal: 16),
+    child: Row(
+    children: [
+    Text("Action", style: AppStyle.white20RobotoRegular),
+    Spacer(),
+    InkWell(
+    onTap: () {
+    navigateProvider.updateIndex(2);
+    },
+    child: Row(
+    children: [
+    Text(
+    "See More ",
+    style: AppStyle.white20RobotoRegular.copyWith(
+    color: AppColors.orange,
+    fontSize: 16,
+    ),
+    ),
+    Icon(
+    Icons.arrow_forward,
+    color: AppColors.orange,
+    size: 16,
+    ),
+    ],
+    ),
+    ),
+    ],
+    ),
+    ),
+    SizedBox(height: size.height * 0.01),
+    Padding(
+    padding: EdgeInsets.symmetric(horizontal: 16),
+    child: SizedBox(
+    height: size.height * 0.23,
+    child: ListView.separated(
+    separatorBuilder: (context, index) =>
+    SizedBox(width: 16),
+    scrollDirection: Axis.horizontal,
+    itemCount: viewModel.actionMovies.length,
+    itemBuilder: (context, index) {
+    return Container(
+    width: size.width * 0.325,
+    child: CardMovieWidget(
+    vertical: 2,
+    horizontal: 4,
+    movie: viewModel.actionMovies[index],
+    ),
+    );
+    },
+    ),
+    ),
+    ),
+    SizedBox(height: size.height * 0.1),
+    ],
+    ),
+    ),
+    );
+    } else if (state is GetPopularMoviesErrorState) {
+    return Text("error", style: AppStyle.white20RobotoRegular);
+    } else {
+    return Center(
+    child: CircularProgressIndicator(color: AppColors.white),
+    );
+    }
+    },
     );
   }
 }
