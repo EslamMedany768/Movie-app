@@ -30,11 +30,13 @@ class BrowseScreenViewModel extends Cubit<BrowseScreenStates> {
         emit(GetGenreListErrorState(error: error.error));
       },
       (response) {
-        emit(GetGenreListSuccessState(genreList: response));
         genreList = response.genres!;
+        emit(GetGenreListSuccessState());
+
       },
     );
   }
+
 
   getSpecificMovies(String categoryId) async {
     // emit(GetGenreListLoadingState());
@@ -44,9 +46,10 @@ class BrowseScreenViewModel extends Cubit<BrowseScreenStates> {
         emit(DiscoverMoviesGetSpecificMoviesErrorState(error: error.error));
       },
       (response) {
-        emit(GetGenreListSuccessState(genreList: null));
+        genreMovies=[];
         genreMovies = response.results;
-        isEmpty = false;
+        emit(GetGenreListSuccessState());
+
       },
     );
   }

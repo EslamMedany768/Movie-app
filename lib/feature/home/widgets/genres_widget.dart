@@ -15,7 +15,7 @@ class GenresWidget extends StatelessWidget {
 
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: size.width * 0.075,
+        horizontal: size.width * 0.06,
         vertical: 8,
       ),
       decoration: BoxDecoration(

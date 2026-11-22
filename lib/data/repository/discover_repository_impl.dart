@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:movies_app/core/api/api_manager.dart';
 import 'package:movies_app/core/failures/failures.dart';
 import 'package:movies_app/domain/entity/GenreListEntity.dart';
+import 'package:movies_app/domain/entity/MovieDetailsResponseEntity.dart';
 import 'package:movies_app/domain/repositorty/data_sources/remote_data_source/discover_remote_data_source.dart';
 import 'package:movies_app/domain/repositorty/repositories/discover_repository.dart';
 
@@ -25,4 +26,18 @@ class DiscoverRepositoryImpl implements DiscoverRepository {
     );
   }
 
+  @override
+  Future<Either<Failures, MovieDetailsResponseEntity>> getMovieDetails(
+    int movieId,
+  ) async {
+    var either = await discoverRemoteDataSource.getMovieDetails(movieId);
+    return either.fold(
+      (error) {
+        return Left(error);
+      },
+      (response) {
+        return Right(response);
+      },
+    );
+  }
 }

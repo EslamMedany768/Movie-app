@@ -10,13 +10,13 @@ import '../../../../../core/utils/app_style.dart';
 class EditProfileScreen extends StatelessWidget {
   static const String routeName = "edit_profile_screen";
 
-  EditProfileScreen({super.key});
+  const EditProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: InkWell(
           onTap: () {

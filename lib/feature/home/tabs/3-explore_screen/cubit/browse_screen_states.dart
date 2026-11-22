@@ -5,9 +5,9 @@ import '../../../../../domain/entity/MoviesEntity.dart';
 class BrowseScreenStates {}
 
 class GetGenreListSuccessState extends BrowseScreenStates {
-  GenreListEntity? genreList;
 
-  GetGenreListSuccessState({ this.genreList});
+
+  GetGenreListSuccessState();
 }
 
 class GetGenreListErrorState extends BrowseScreenStates {

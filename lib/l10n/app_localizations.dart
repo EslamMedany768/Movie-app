@@ -155,7 +155,7 @@ abstract class AppLocalizations {
   /// No description provided for @confirm_password.
   ///
   /// In en, this message translates to:
-  /// **'Password'**
+  /// **'Re-Password'**
   String get confirm_password;
 
   /// No description provided for @phone_number.

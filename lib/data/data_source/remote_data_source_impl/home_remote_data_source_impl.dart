@@ -6,7 +6,11 @@ import 'package:injectable/injectable.dart';
 import 'package:movies_app/core/api/api_constant.dart';
 import 'package:movies_app/core/api/api_manager.dart';
 import 'package:movies_app/core/api/end_points.dart';
+import 'package:movies_app/data/model/CastResponseDm.dart';
 import 'package:movies_app/data/model/MovieDm.dart';
+import 'package:movies_app/data/model/ScreenShotResponseDm.dart';
+import 'package:movies_app/domain/entity/CastResponseEntity.dart';
+import 'package:movies_app/domain/entity/ScreenShotResponseEntity.dart';
 import 'package:movies_app/domain/repositorty/data_sources/remote_data_source/home_remote_data_source.dart';
 
 import '../../../core/failures/failures.dart';
@@ -56,6 +60,82 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         }
       } else {
         return Left(NetworkError(error: "Check Your Internet"));
+      }
+    } catch (e) {
+      return Left(Failures(error: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failures, MovieResponseDm>> getSimilarMovie(int movieId) async {
+    try {
+      var connectivityResult = await Connectivity().checkConnectivity();
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        var response = await apiManager.getData(
+          endPoint: "${EndPoints.apiRequestMovieDetails}$movieId/similar",
+          headers: {"Authorization": "Bearer ${ApiConstant.token}"},
+        );
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          return Right(MovieResponseDm.fromJson(response.data));
+        } else {
+          return Left(
+            ServerError(error: "Server Error => ${response.statusMessage!}"),
+          );
+        }
+      } else {
+        return Left(NetworkError(error: "Check Your Internet"));
+      }
+    } catch (e) {
+      return Left(Failures(error: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failures, ScreenShotResponseEntity>> getScreenShots(
+    int movieId,
+  ) async {
+    try {
+      var connectivityResult = await Connectivity().checkConnectivity();
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        var response = await apiManager.getData(
+          headers: {"Authorization": "Bearer ${ApiConstant.token}"},
+          endPoint: "${EndPoints.apiRequestMovieDetails}$movieId/images",
+          queryParam: {"movie_id": movieId},
+        );
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          return Right(ScreenShotResponseDm.fromJson(response.data));
+        } else {
+          return Left(
+            ServerError(error: "server error => ${response.statusMessage}"),
+          );
+        }
+      } else {
+        return Left(NetworkError(error: "please check your internet"));
+      }
+    } catch (e) {
+      return Left(Failures(error: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failures, CastResponseDm>> getCastOfMovie(int movieId) async {
+    try {
+      var connectionResult = await Connectivity().checkConnectivity();
+      if (connectionResult.contains(ConnectivityResult.mobile) ||
+          connectionResult.contains(ConnectivityResult.wifi)) {
+        var response = await apiManager.getData(
+          endPoint: "${EndPoints.apiRequestMovieDetails}$movieId/credits",
+          headers: {"Authorization": "Bearer ${ApiConstant.token}"},
+        );
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          return Right(CastResponseDm.fromJson(response.data));
+        } else {
+          return Left(ServerError(error: response.statusMessage!));
+        }
+      } else {
+        return Left(NetworkError(error: "check your connection"));
       }
     } catch (e) {
       return Left(Failures(error: e.toString()));
